@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<head>
+  <style media="screen">
+    .alert {
+      margin-left: 25%;
+      margin-right: 25%;
+      padding: 20px;
+      background-color: #f44336;
+      color: white;
+    }
+
+    .w3-panel p {
+      padding-top: 10px;
+    }
+
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .closebtn:hover {
+      color: black;
+    }
+  </style>
+
+
+</head>
+<br>
+
+<!--  {% include 'partials/cards.html' %}
+ -->
+<div class="w3-panel w3-blue ">
+  <p>Notice Board</p>
+</div><br>
+
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong></strong><br> 
+</div>
+
+  
+
+
+
+
+
+     
+
+
+
+
+{% endblock content %}

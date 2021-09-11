@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}	
+<br><br>
+<div class="jumbotron text-center">
+
+  <h1 class="display-4">Hello </h1>
+  <p class="lead">Welcome to Online School Management System</p>
+  <hr class="my-4">
+  <p>How do you want to proceed? </p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Register</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+  </p>
+</div>
+
+{% endblock content %}
