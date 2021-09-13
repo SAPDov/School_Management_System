@@ -15,6 +15,8 @@ import os
 from django.contrib.messages import constants as messages
 
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,7 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3viap32l#pzj#+5ryz%4p#w20k#i(t62$7x4qpyi2!9+_b51@c'
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,15 +93,9 @@ DATABASES = {
 }
 
 #POSTGRES
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'schooldb',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-    }
-}
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -153,7 +150,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
-LOGIN_REDIRECT_URL = 'profile'
+
+LOGIN_REDIRECT_URL = 'login_redirect'
+
 LOGOUT_REDIRECT_URL = 'info'
 
 
@@ -162,3 +161,10 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
 
 }
+
+
+
+try:
+    from .local_settings import * 
+except ImportError:
+    raise ('local_settings file is required ro run this project')

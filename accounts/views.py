@@ -62,6 +62,16 @@ class ClickView(TemplateView):
 
 
 
+def login_redirect(request):
+	if request.user.is_student:
+		# change unique
+		return redirect ('s_dashboard')
+	else:
+		return redirect ('t_dashboard')
+
+
+
+
 
 # class UpdateProfile(UpdateView):
 

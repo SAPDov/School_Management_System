@@ -1,15 +1,6 @@
 <style>
   
-.sidebar-container {
-  position: fixed;
-  width: 220px;
-  height: 100%;
-  left: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background: #1a1a1a;
-  color: #fff;
-}
+
 
 .content-container {
   padding-top: 20px;
@@ -81,11 +72,9 @@
   background-color: transparent;
 }
 
-.content-container {
-  padding-left: 220px;
-}
-</style>
 
+</style>
+<div class="sidebar">
 <div class="sidebar-container">
   <div class="sidebar-logo">
     Project Name
@@ -97,15 +86,30 @@
         <i class="fa fa-home" aria-hidden="true"></i> Homepage
       </a>
     </li>
+    {% if user.is_student %}
+
     <li>
-      <a href="#">
+      <a href="{% url 's_dashboard' %}">
         <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
+      </a>
+    </li>
+    {% else %}
+        <li>
+      <a href="{% url 't_dashboard' %}">
+        <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
+      </a>
+    </li>
+    {% endif %}
+
+      <li>
+      <a href="#">
+        <i class="fa fa-tachometer" aria-hidden="true"></i> Courses
       </a>
     </li>
     <li class="header">Another Menu</li>
     <li>
-      <a href="#">
-        <i class="fa fa-users" aria-hidden="true"></i> Friends
+      <a href="{%url 'profile' %}">
+        <i class="fa fa-users" aria-hidden="true"></i> Profile
       </a>
     </li>
     <li>
@@ -118,22 +122,16 @@
         <i class="fa fa-info-circle" aria-hidden="true"></i> Information
       </a>
     </li>
+     <li>
+      <a href="{% url 'logout' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>    
+        <i class="fa fa-info-circle" aria-hidden="true"></i> Logout
+      </svg>
+      </a>
+    </li>
   </ul>
 </div>
-
-<div class="content-container">
-
-  <div class="container-fluid">
-
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <h1>Navbar example</h1>
-      <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-      <p>To see the difference between static and fixed top navbars, just scroll.</p>
-      <p>
-        <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-      </p>
-    </div>
-
-  </div>
+</div>
 </div>

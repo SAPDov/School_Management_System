@@ -4,16 +4,23 @@
 
 
 {% block content %}
-<br><br><br>
-<p>
+	<br><br><br>
+	<p>
 
 
-<p>Name: {{ object.name }}</p>
-<p>Description: {{ object.description }}</p>
-<p>Price: {{ object.price }}</p>
-<p>Related Student: {{ object.user.student_courses.first_name }}</p>
-<p>Related Teacher: {{ object.teacher_courses.first_name }}</p>
+	<p>Name: {{ object.name }}</p>
+	<p>Description: {{ object.description }}</p>
+	<p>Price: {{ object.price }}</p>
 
-</p>
+	{% for student in object.student.all %}
+	<p>Related Student: {{ student }}</p>
 
+<!-- create a for loop to show specific filter:
+student.first_name -->
+<!-- 	<p>Related Teacher: {{ object.teacher.first_name }}</p>
+
+	</p>
+ -->
+ 
+ {% endfor %}
 {% endblock content %}
