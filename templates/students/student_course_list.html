@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% for course in course_list %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    	<a class=text-dark href="{% url 'course-detail' course.id %}">	
+    	{{course.name}}	
+    	</a>
+ 		
+    </div>
+  	<div class="col-sm">
+  	<p>
+	  	{% for day in course.days.all %}
+		    	{{day.name}}<br>
+	    {% endfor %}
+	</p>
+	</div>
+ 	 <div class="col-sm">
+	<p>
+	  	{% for teacher in course.teacher.all %}
+		    	{{teacher}}<br>
+	    {% endfor %}
+	</p>
+  
+    </div>
+  </div>
+</div><hr>
+
+{% endfor %}
+
+
+{% endblock content %}	
+
+
+
+<!--
+should be inside the for list_object loop - Give the students names that relates to the course
+{% for student in course.student.all %}
+		Related_student: {{student}}<br>
+{% endfor %}	-->

@@ -60,14 +60,18 @@ class ClickView(TemplateView):
 	template_name = 'accounts/click_view.html'
 
 
+class Dashboard(TemplateView):
+	template_name = 'accounts/dashboard.html'
 
 
-def login_redirect(request):
-	if request.user.is_student:
-		# change unique
-		return redirect ('s_dashboard')
-	else:
-		return redirect ('t_dashboard')
+	
+
+# def login_redirect(request):
+# 	if request.user.is_student:
+# 		# change unique
+# 		return redirect('students/s_dashboard')
+# 	else:
+# 		return redirect('teachers/t_dashboard')
 
 
 

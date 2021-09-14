@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+		<div class="table">
+			<table class="table table-hover">
+				
+					<tr>
+						<th class="border w-1/4 px-4 py-2">Course Name</th>
+						<th class="border w-1/6 px-4 py-2">Dates</th>
+						<th class="border w-1/6 px-4 py-2">Days</th>
+						
+					</tr>
+		
+					
+				{% for course in course_list %}
+
+					  <tr class="{% cycle 'row1' 'row2' 'row3' %}"><td >
+					  	<a class="text-dark" href="{% url 'course-detail' course.id %}">
+					  		{{course.name}}</td><a/>
+							<td >{{course.start_date}} {{course.end_date}}</td>
+						{% for day in course.days.all %}
+							 <p><td>
+								{{day.name}}</td>
+							</p>
+								
+						{% endfor %}
+					  </tr>	
+					{% endfor %}
+					
+				</div>
+			</div>
+
+{% endblock content %}
+		

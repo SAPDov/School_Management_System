@@ -1,18 +1,17 @@
 from django.shortcuts import render
-from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+from courses.models import Course
+from .models import Teacher
 
-# Create your views here.
-
-# class TeacherLoginView(LoginView):
-# 	template_name = 'teacher/tlogin.html'
-
-# 	def get_success_url(self):
-# 		url = self.get_redirect_url()
-# 		return url 
-
-
-
-class Dashboard(TemplateView):
-	template_name = 'teachers/dashboard.html'
+class CourseListView(ListView):
+	model = Course
+	template_name = 'teachers/teacher_course_list.html'
+	
+	def get_queryset(self):
+		qs = super().get_queryset()
+		print(qs)
+		filtered_qs = qs.filter(teacher=self.request.user.teacher)
+		print(filtered_qs)
+		return filtered_qs
 
 

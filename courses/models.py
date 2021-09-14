@@ -7,6 +7,8 @@ from teachers.models import Teacher
 class Days(models.Model):
 	name = models.CharField(max_length=10)
 
+	def __str__(self):
+		return self.name
 
 
 class Course(models.Model):
@@ -27,6 +29,9 @@ class Lesson(models.Model):
 	lessons = models.ForeignKey(Course, null=True, blank=True, on_delete=models.SET_NULL)
 	start_time = models.DateTimeField()
 	end_time = models.DurationField()
+
+	def __str__(self):
+		return self.lessons.name 
 
 	# teacher = models.ForeignKey(Teacher, related_name="classes")
  #    course = models.ForeignKey(Course, related_name="classes")

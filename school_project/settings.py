@@ -151,7 +151,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 
-LOGIN_REDIRECT_URL = 'login_redirect'
+LOGIN_REDIRECT_URL = 'dashboard'
 
 LOGOUT_REDIRECT_URL = 'info'
 
