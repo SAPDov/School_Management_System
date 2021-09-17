@@ -7,7 +7,7 @@
 <br><br><br>
 <p>
 {% for course in object_list %}
-<a class="text-dark" href="{% url 'course-detail' course.id %}">
+<a class="text-dark" href="{% url 'course_detail' course.pk %}">
 	<h2>{{course.name}}</h2>
 
 </a>

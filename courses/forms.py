@@ -4,9 +4,11 @@ from .models import Comment
 class CommentForm(ModelForm):
 	class Meta:
 		model = Comment
-		fields = ('comment_name', 'body')
+		fields = ('body', )
 
-		labels = {"body": 'Comment:'}
+		labels = {'body': 'Comment:'}
 		# widget = {
 
 		# }
+
+	

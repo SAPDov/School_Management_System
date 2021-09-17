@@ -1,17 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-<form action="{% url 'detail:comment' object.pk %}" method="POST">
-	{% csrf_token %}
-		{{form.as_p}}
-<!-- <input type="submit" name="form" class="btn btn-info"> -->
-	<button class="btn btn-info">
-    		Save
-    	</button>
-     
-</form>
 
+
+{% block content %}
+    <h1>New comment</h1>
+    <form  action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+          <button type="submit">Submit</button>
+    </form>
 
 
 {% endblock content %}
@@ -24,3 +22,11 @@
 	</form>
 	</div> 		
 </div> -->
+<!-- 
+<form action="{% url 'detail' object.pk %}" method="POST">
+	{% csrf_token %}
+		{{form.as_p}}
+ <input type="submit" name="form" class="btn btn-info"> 
+	<button class="btn btn-info">
+    		Save
+    	</button></form> -->

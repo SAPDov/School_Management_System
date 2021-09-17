@@ -1,7 +1,7 @@
 from django.db import models
 from students.models import Student
 from teachers.models import Teacher
-# from django.urls import reverse
+from django.urls import reverse
 
 
 # Create your models here.
@@ -25,7 +25,7 @@ class Course(models.Model):
 
 
 	# def get_absolute_url(self):
-	# 	return reverse('course-detail', kwargs={'pk': self.pk})
+	# 	return reverse('detail', kwargs={'pk': self.pk})
 
 
 	def __str__(self):
@@ -48,7 +48,7 @@ class Comment(models.Model):
 	student = models.ForeignKey(Student, on_delete=models.CASCADE)
 
 	def __str__(self):
-		return self.comment_name
+		return self.body
 
 	class Meta:
 		ordering = ['-date_added']
