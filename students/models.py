@@ -10,12 +10,11 @@ from teachers.models import Teacher
 class Student(models.Model):
 	user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 	phone = models.CharField(max_length=30)
-	image = models.ImageField(upload_to='media/', null=True, default='static/img/student_img.png')
+	image = models.ImageField(upload_to='media/', null=True)
+	address = models.CharField(max_length=100)
 
 	def __str__(self):
 		return self.user.username
-
-
 
 
 @receiver(post_save, sender=CustomUser)

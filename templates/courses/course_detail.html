@@ -14,6 +14,15 @@
 
 	{% for student in object.student.all %}
 	<p>Related Student: {{ student }}</p>
+ 		{% endfor %}
+
+
+	<a href="{% url 'detail:comment' object.pk %}">Write A comments</a>
+
+
+
+{% endblock content %}
+
 
 <!-- create a for loop to show specific filter:
 student.first_name -->
@@ -22,5 +31,12 @@ student.first_name -->
 	</p>
  -->
  
- {% endfor %}
-{% endblock content %}
+
+ 	<!-- <button calss="btn btn-info">Save</button>
+<form action="{% url 'add-comment' object.pk %}" method="POST">
+	{% csrf_token %}
+		{{form.as_p}}
+<input type="submit" name="form" class="btn btn-info">
+
+</form>
+-->

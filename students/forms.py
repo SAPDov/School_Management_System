@@ -7,8 +7,6 @@ from .models import Student
 class StudentProfileForm(ModelForm):
 	class Meta:
 		model = Student
-		fields = ['phone', 'image']
-
-
+		fields = ['phone', 'image', 'address']
 
 

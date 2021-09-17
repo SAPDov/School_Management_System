@@ -7,5 +7,5 @@ from .models import Teacher
 class TeacherProfileForm(ModelForm):
 	class Meta:
 		model = Teacher
-		fields = ['phone', 'image']
+		fields = ['phone', 'image', 'address']
 

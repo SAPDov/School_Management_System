@@ -6,7 +6,7 @@ from django.contrib import messages
 # from django.contrib.messages import constants as messages
 from students.forms import StudentProfileForm
 from teachers.forms import TeacherProfileForm
-from .forms import RegisterForm
+from .forms import RegisterForm, UserUpdateForm
 
 # Create your views here.
 
@@ -36,23 +36,39 @@ def profile(request):
 
 def edit_profile(request):
 	if request.method == 'POST':
-		u_form = RegisterForm(request.POST,instance=request.user)
-		if request.GET['is_student']:
-			p_form = StudentProfileForm(request.POST,request.FILES,instance=request.user.profile)
-		elif request.GET['is_teacher']:
-			p_form = TeacherProfileForm(request.POST,request.FILES,instance=request.user.profile)
+		u_form = UserUpdateForm(request.POST,instance=request.user)
+		if request.user.is_student:
+			p_form = StudentProfileForm(request.POST, request.FILES, instance=request.user.profile())
+		elif request.user.is_teacher:
+			p_form = TeacherProfileForm(request.POST, request.FILES, instance=request.user.profile())
 
 		if p_form.is_valid() and u_form.is_valid():
 			u_form.save()
 			p_form.save()
+		
 			messages.success(request,'Your Profile has been updated!')
-			return redirect('accounts/profile')
+			return redirect('profile')
+		else:
+			print(u_form.errors, p_form.errors)
 	else:
-		p_form = ProfileUpdateForm(instance=request.user)
-		u_form = UserUpdateForm(instance=request.user.profile)
+		u_form = UserUpdateForm(instance=request.user)
 
-	context={'p_form': p_form, 'u_form': u_form}
-	return render(request, 'edit_profile.html', context)
+		if request.user.is_student:
+			p_form = StudentProfileForm(instance=request.user.profile())
+		
+		elif request.user.is_teacher:
+			p_form = TeacherProfileForm(instance=request.user.profile())
+			
+		
+	context = {
+	'u_form': u_form, 
+	'p_form': p_form,
+	}
+
+	return render(request, 'accounts/edit_profile.html', context)
+
+	# context = {'u_form': u_form, 'p_form': p_form}
+
 
 
 #move to the pages app
