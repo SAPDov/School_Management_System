@@ -1,7 +1,7 @@
 from django.db import models
 from students.models import Student
 from teachers.models import Teacher
-from django.urls import reverse
+from .helper import duration
 
 
 # Create your models here.
@@ -24,25 +24,38 @@ class Course(models.Model):
 	days = models.ManyToManyField(Days)
 
 
-	# def get_absolute_url(self):
-	# 	return reverse('detail', kwargs={'pk': self.pk})
-
-
 	def __str__(self):
 		return self.name
 
+	def __repr__(self):
+		return self.name
+
+
 class Lesson(models.Model):
-	lessons = models.ForeignKey(Course, null=True, blank=True, on_delete=models.SET_NULL)
+
+	course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.SET_NULL, related_name='lessons')
 	start_time = models.DateTimeField()
-	end_time = models.DurationField()
+	end_time = models.DateTimeField(null=True, blank=True)
+	# student = models.ManyToManyField(Student, related_name='student_lesson')
 
 	def __str__(self):
-		return self.lessons.name 
+		return f'{self.course} {self.start_time}' 
 
+
+class Attendance(models.Model):
+	# course = models.ForeignKey(Course, on_delete=models.CASCADE)
+	# time_stamp = models.DateTimeField(auto_now_add=True)
+	student = models.ForeignKey(Student, on_delete=models.CASCADE)
+	lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+	teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+	status = models.BooleanField(default='True')
+
+	def __str__(self):
+		return f'{self.student} {self.course} {self.status}'
 
 class Comment(models.Model):
-	course_name = models.ForeignKey(Course, null=True, on_delete=models.CASCADE, related_name='comments')
-	comment_name = models.CharField(max_length=100, blank=True)
+	course = models.ForeignKey(Course, null=True, on_delete=models.CASCADE, related_name='comments')
+	name = models.CharField(max_length=100, blank=True)
 	date_added = models.DateTimeField(auto_now_add=True)
 	body = models.TextField(max_length=500)
 	student = models.ForeignKey(Student, on_delete=models.CASCADE)

@@ -1,22 +1,15 @@
-{% extends 'base.html' %}
-{% load static %}
+ {% extends 'base.html' %}
+ {% load static %}
 
 {% block content %}
+
 <div class=container>
 <div class="card-group">
 
   <div class="card">
     <img src="{% static 'img/default.jpeg' %}" class="rounded-circle p-1 bg-primary" width="250" alt="...">
     <div class="card-body">
-      <h5 class="card-title">TEACHER</h5>
-      <p class="card-text"></p>
-      <a href="{% url 'click' %}" class="btn btn-dark">View</a>
-    </div>
-  </div>
-  <div class="card">
-    <img src="{% static 'img/default.jpeg' %}" class="rounded-circle p-1 bg-primary" width="250" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">STUDENT</h5>
+      <h5 class="card-title">Login</h5>
       <p class="card-text"></p>
       <a href="{% url 'click' %}" class="btn btn-dark">View</a>
     </div>

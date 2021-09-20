@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+	{% csrf_token %}
+		{{ formset.management_form }}
+		<h1>check</h1>
+  {#{% for student in lesson.course.student.all %}#}    
+        {% for form in formset %}
+			{{student.user.first_name}} {{ form.as_p }}
+    {# {% endfor %} #}	
+     {% endfor %}       
+
+    <br><br>
+   
+
+{% endblock content %}

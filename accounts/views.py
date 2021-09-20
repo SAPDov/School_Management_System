@@ -8,6 +8,8 @@ from students.forms import StudentProfileForm
 from teachers.forms import TeacherProfileForm
 from .forms import RegisterForm, UserUpdateForm
 
+
+
 # Create your views here.
 
 
@@ -18,6 +20,7 @@ def register(request):
 			form.save()
 			username = form.cleaned_data.get('username')
 			password1 = form.cleaned_data.get('password1')
+			email = form.cleaned_data.get('email')
 			user = authenticate(username=username, password1=password1)
 			if user:
 				login(request, user)
@@ -26,8 +29,6 @@ def register(request):
 	else:
 		form = RegisterForm()
 	return render(request, 'accounts/register.html', {'form': form})
-
-
 
 @login_required
 def profile(request):
@@ -82,20 +83,6 @@ class Dashboard(TemplateView):
 
 	
 
-# def login_redirect(request):
-# 	if request.user.is_student:
-# 		# change unique
-# 		return redirect('students/s_dashboard')
-# 	else:
-# 		return redirect('teachers/t_dashboard')
-
-
-
-
-
-# class UpdateProfile(UpdateView):
-
-# 	model = Student
 
 
 

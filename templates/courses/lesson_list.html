@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+	<div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
+		<div class="table">
+			<table class="table table-hover">
+			<thead>
+				<tr class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+						<th>Course Name</th>
+						<th>Dates</th>
+						
+						
+					</tr>
+			</thead >			
+				{% for lesson in object_list %}
+		<tbody class="bg-white">
+			<div class="flex items-center">
+				<div class="flex-shrink-0 w-10 h-10">
+					<tr class="{% cycle 'row1' 'row2' %}">
+						<td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+							<a class="text-dark" href="{% url 'lesson_detail' lesson.pk %}">
+					  					{{lesson.course}}</td><a/>
+						<td >{{lesson.start_time}} - {{lesson.end_time}} </td>
+						
+						</div>		
+					  </tr>	
+				{% endfor %}
+	
+			</tbody>	
+			{% if user.is_teacher %}
+			<a class="text-dark" href="{% url 'add_lesson' %}"><h2></h2>Add lesson</a>
+		{% endif %}	
+			</div>
+			</div>
+
+		
+		</div>
+	</div>
+
+{% endblock content %}
+
+
+<!-- <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200"><div class="container mx-auto px-6 py-8"><div><h3 class="text-3xl font-medium text-gray-700">Tables</h3><div class="mt-4"><h4 class="text-gray-600">Simple Table</h4><div class="mt-6"><div class="my-6 overflow-hidden bg-white rounded-md shadow"><table class="w-full text-left border-collapse"><thead class="border-b"><tr><th class="px-5 py-3 text-sm font-medium text-gray-100 uppercase bg-indigo-800"> City </th><th class="px-5 py-3 text-sm font-medium text-gray-100 uppercase bg-indigo-800"> Total orders </th></tr></thead><tbody><tr class="hover:bg-gray-200"><td class="px-6 py-4 text-lg text-gray-700 border-b">New York</td><td class="px-6 py-4 text-gray-500 border-b">200,120</td></tr><tr class="hover:bg-gray-200"><td class="px-6 py-4 text-lg text-gray-700 border-b">Manchester</td><td class="px-6 py-4 text-gray-500 border-b">632,310</td></tr><tr class="hover:bg-gray-200"><td class="px-6 py-4 text-lg text-gray-700 border-b"> -->

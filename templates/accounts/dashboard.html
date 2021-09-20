@@ -3,18 +3,7 @@
 
 
 {% block content %}
-      <head>
-  <style media="screen">
-    .alert {
-      margin-left: 25%;
-      margin-right: 25%;
-      padding: 20px;
-      background-color: #f44336;
-      color: white;
-    }
-
-      </head>
-
+ 
 {% if user.is_student %}
 
 
@@ -25,11 +14,11 @@
         Hello {{user.username}}
       </div><br>
 
-      <div class="alert">
+<!--       <div class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong></strong><br> 
       </div>
-
+ -->
 {% else %}
   
 
@@ -38,11 +27,11 @@
       <div class="w3-panel w3-blue ">
         <p>Notice Board Teacher</p>
       </div><br>
-
+<!-- 
       <div class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong></strong><br> 
-      </div>
+      </div> -->
 
 {% endif %}
   
