@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from .models import Teacher
 from courses.models import Attendance, Lesson                      
 from django.forms import modelformset_factory, inlineformset_factory, widgets
+from bootstrap_datepicker_plus import DateTimePickerInput, TimePickerInput
 
 
 
@@ -16,8 +17,15 @@ class Lessonform(ModelForm):
 	class Meta:
 		model = Lesson
 		exclude = ['course']
+		start_time = forms.DateTimeField(
+			widget = DateTimePickerInput(format='%m/%d/%Y %H:%M'))
+			
 
 
+			  # default date-format %m/%d/%Y will be used
+			# 'end_date': TimePickerInput(format='%m/%d/%Y') # specify date-frmat
+		
+	
 
 class Attendanceform(ModelForm):
 	class Meta:

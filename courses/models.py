@@ -2,6 +2,8 @@ from django.db import models
 from students.models import Student
 from teachers.models import Teacher
 from .helper import duration
+from django.urls import reverse
+
 
 
 # Create your models here.
@@ -35,12 +37,14 @@ class Lesson(models.Model):
 
 	course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.SET_NULL, related_name='lessons')
 	start_time = models.DateTimeField()
-	end_time = models.DateTimeField(null=True, blank=True)
+	end_time = models.TimeField(null=True, blank=True)
 	# student = models.ManyToManyField(Student, related_name='student_lesson')
 
 	def __str__(self):
-		return f'{self.course} {self.start_time}' 
+		return f'{self.course} {self.start_time}'
 
+	def get_absolute_url(self):
+		return reverse('course:lesson_list', args=(obj.pk, ))
 
 class Attendance(models.Model):
 	# course = models.ForeignKey(Course, on_delete=models.CASCADE)

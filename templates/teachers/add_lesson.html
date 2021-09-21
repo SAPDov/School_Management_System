@@ -1,14 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load bootstrap4 %}
+{% bootstrap_javascript jquery='full' %}
+
 
 
 
 {% block content %}
     <h1>New comment</h1>
-    <form  action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-          <button type="submit">Submit</button>
+    <form  action="{% url 'course:lesson_list' obj.pk %}" method="POST"> {% csrf_token %} 
+	{{ form.media }}
+ 
+   
+ 
+       {% bootstrap_form form %}
+      	
+
+        {% buttons %}
+			<button type="submit" class="btn btn-primary" value="vote">Save</button>
+		{% endbuttons %}
+         
     </form>
 
 

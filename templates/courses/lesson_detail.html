@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load mytags %}
 
 
 
@@ -33,7 +34,7 @@
                                     </tr>
                                 </thead> 
                     {% for student in object.course.student.all %} 
-                      
+
                                 <tbody>
                                     <tr>
                             {% if student.image %}
@@ -45,18 +46,26 @@
                                         <td>{{student.phone}}</td>
                                         <td>{{student.user.email}}</td>
 
-                            {% for status in student.attendance_set.all %}
-                                {% if status.status %}
+                           {% if object|has_attendance:student == 'N' %}
+                                            <td>No attendance</td>
+
+                             <a href="{% url 'add_attendance' object.pk %}" class="text-indigo-600 hover:text-indigo-900">Add attendance</a>
+                                             
+                            {% elif object|has_attendance:student %}
+
                                         <td><span class="badge bg-success">Present</span></td>
                                 {% else %}
                                         <td><span class="badge bg-danger">Absent</span></td>
-                                {% endif %}
-                            {% endfor %}
+                               
+                            {% endif %}
+                          
                                     </tr>
-                     
+
                                 </tbody>
-                        {% endfor %}
+                            {% endfor %}
+                       
                             </table>
+                        
                         </div>
                     </div>
             </div>
@@ -68,11 +77,10 @@
 {% endblock content %}
 
 
-<main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200"><div class="container mx-auto px-6 py-8"><div><h3 class="text-3xl font-medium text-gray-700">Tables</h3><div class="mt-4"><h4 class="text-gray-600">Simple Table</h4><div class="mt-6"><div class="my-6 overflow-hidden bg-white rounded-md shadow"><table class="w-full text-left border-collapse"><thead class="border-b"><tr><th class="px-5 py-3 text-sm font-medium text-gray-100 uppercase bg-indigo-800"> City </th><th class="px-5 py-3 text-sm font-medium text-gray-100 uppercase bg-indigo-800"> Total orders </th></tr></thead><tbody><tr class="hover:bg-gray-200"><td class="px-6 py-4 text-lg text-gray-700 border-b">New York</td><td class="px-6 py-4 text-gray-500 border-b">200,120</td></tr><tr class="hover:bg-gray-200"><td class="px-6 py-4 text-lg text-gray-700 border-b">Manchester</td><td class="px-6 py-4 text-gray-500 border-b">632,310</td></tr><tr class="hover:bg-gray-200"><td class="px-6 py-4 text-lg text-gray-700 border-b">
+<!-- <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200"><div class="container mx-auto px-6 py-8"><div><h3 class="text-3xl font-medium text-gray-700">Tables</h3><div class="mt-4"><h4 class="text-gray-600">Simple Table</h4><div class="mt-6"><div class="my-6 overflow-hidden bg-white rounded-md shadow"><table class="w-full text-left border-collapse"><thead class="border-b"><tr><th class="px-5 py-3 text-sm font-medium text-gray-100 uppercase bg-indigo-800"> City </th><th class="px-5 py-3 text-sm font-medium text-gray-100 uppercase bg-indigo-800"> Total orders </th></tr></thead><tbody><tr class="hover:bg-gray-200"><td class="px-6 py-4 text-lg text-gray-700 border-b">New York</td><td class="px-6 py-4 text-gray-500 border-b">200,120</td></tr><tr class="hover:bg-gray-200"><td class="px-6 py-4 text-lg text-gray-700 border-b">Manchester</td><td class="px-6 py-4 text-gray-500 border-b">632,310</td></tr><tr class="hover:bg-gray-200"><td class="px-6 py-4 text-lg text-gray-700 border-b">
 
-
+ -->
 <!-- 
-
 
             <div class="col-xl-4">
                 <div class="card">
@@ -165,4 +173,4 @@
         </div>
 
     </div>
-</div> -->
+</div> --> 

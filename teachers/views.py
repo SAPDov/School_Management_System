@@ -7,7 +7,7 @@ from students.models import Student
 from django.urls import reverse_lazy
 from .forms import AttendanceFormset, Attendanceform, Lessonform
 from django.forms import modelformset_factory
-
+from bootstrap_datepicker_plus import DateTimePickerInput
 
 
 
@@ -40,6 +40,10 @@ class LessonCreateView(CreateView):
 		print(context)
 		return context
 
+	def get_form(self):
+		form = super().get_form()
+		form.fields['start_time'].widget = DateTimePickerInput()
+		return form
 
 
 	def form_valid(self, form):
@@ -55,7 +59,7 @@ class AttendanceCreateView(CreateView):
 	model = Attendance
 	form_class = Attendanceform
 	template_name = 'teachers/add_attendance.html'
-	# success_url = reverse_lazy('t_course_list')
+	# success_url = reverse_lazy('lesson_list')
 
 
 	def get_context_data(self, **kwargs):
@@ -67,9 +71,14 @@ class AttendanceCreateView(CreateView):
 		initial=[{'student':student.id} for student in self.lesson.course.student.all()])
 		return context
 
+	def get_lesson(self):
+		lesson_id = self.kwargs['id']
+		return get_object_or_404(Lesson, id=lesson_id)
+
 
 	def post(self, request, *args, **kwargs):
-		formset = AttendanceFormset(request.POST)
+		formset = AttendanceFormset(request.POST, request.FILES)
+		# lesson = Lesson.objects.get(id=self.kwargs['id'])
 
 		if formset.is_valid():
 			return self.form_valid(formset)
@@ -79,9 +88,10 @@ class AttendanceCreateView(CreateView):
 		instances = formset.save(commit=False)
 		for instance in instances:
 			instance.teacher = self.request.user.profile()
-			instance.lesson = self.lesson
+			instance.lesson = self.get_lesson()
+			# print(instance.object)
 			instance.save()
-		return redirect('lesson_detail', attendance.lesson.id)
+		return redirect('lesson_list')
 
 
 

@@ -4,17 +4,20 @@
 
 
 {% block content %}
-
+ <form  action="" method="POST" enctype="multipart/form-data">
 	{% csrf_token %}
 		{{ formset.management_form }}
 		<h1>check</h1>
-  {#{% for student in lesson.course.student.all %}#}    
+
         {% for form in formset %}
 			{{student.user.first_name}} {{ form.as_p }}
-    {# {% endfor %} #}	
-     {% endfor %}       
+  
 
+     {% endfor %} 
+
+  
     <br><br>
-   
-
+    <button type="submit">Submit</button> 
+</form>
 {% endblock content %}
+

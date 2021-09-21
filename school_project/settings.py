@@ -13,10 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from django.contrib.messages import constants as messages
 from pathlib import Path
 import os
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -51,6 +47,8 @@ INSTALLED_APPS = [
     'accounts',
     'courses',
     'crispy_forms',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -165,16 +163,13 @@ MESSAGE_TAGS = {
 }
 
 
-# Email settings
+# Email settings - LOCAL_SETTINGS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 
 # Custom setting. To email
-RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
+
 
 
 
