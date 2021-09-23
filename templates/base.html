@@ -1,8 +1,6 @@
 {% load static %}
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,28 +13,21 @@
 	<!--  boxIcons -->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
+
 	<!--  Static css -->
 	<link rel="stylesheet" type='text/css' href="{% static 'css/style.css' %}">
-
-
-	<link rel="stylesheet" type='text/css' href="{% static 'css/bootstrap.css' %}">
-
-	<!--  Font Awesome -->
-	<link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
 
 	 <title>{% block title %} SchoolMS | {% endblock title %}</title>
 </head>
 <body>		
-	{% if user.is_authenticated %}	
 		<!-- SIDEBAR Content  -->
 		<div class="sidebar">
 			{% include 'partials/sidebar.html' %}
 		</div>
-	{% endif %}		
 	<!--Container Main start-->
 	<div class="height-100 bg-light">
-	{% block content %} {% endblock content %}
+		{% block content %} {% endblock content %}
 	</div>
 	<!--Container Main end-->
 	 
@@ -47,10 +38,11 @@
 
 	<!-- XDSoft DateTimePicker -->
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
 
   	<!--  Static JavaScript -->
-	<script type="text/JavaScript" src="{% static 'js/script.js' %}"></script>
+	<script type="text/JavaScript" src="{% static 'js/main.js' %}"></script>
 
 
 </body>
@@ -60,7 +52,3 @@
 
 
 
-
-  
-</head>
-<body>

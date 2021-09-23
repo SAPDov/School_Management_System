@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.contrib import messages
-# from django.contrib.messages import constants as messages
 from students.forms import StudentProfileForm
 from teachers.forms import TeacherProfileForm
 from .forms import RegisterForm, UserUpdateForm
@@ -15,15 +14,18 @@ from .forms import RegisterForm, UserUpdateForm
 
 def register(request):
 	if request.method == 'POST':
-		form = RegisterForm(request.POST)
+		form = RegisterForm(request.POST)	
 		if form.is_valid():
 			form.save()
+# send a sucessfull email after registration
+			form.send()			
 			username = form.cleaned_data.get('username')
 			password1 = form.cleaned_data.get('password1')
-			email = form.cleaned_data.get('email')
 			user = authenticate(username=username, password1=password1)
+
 			if user:
 				login(request, user)
+
 				messages.success(request, f'Your account has been created! You are now able to log in')
 			return redirect('login')
 	else:
@@ -47,7 +49,7 @@ def edit_profile(request):
 			u_form.save()
 			p_form.save()
 		
-			messages.success(request,'Your Profile has been updated!')
+			messages.success(request, 'Your Profile has been updated!')
 			return redirect('profile')
 		else:
 			print(u_form.errors, p_form.errors)

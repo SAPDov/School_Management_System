@@ -9,7 +9,7 @@ from students.models import Student
 from .forms import CommentForm
 
 
-
+# All courses
 class CourseListView(ListView):
 	model = Course
 
@@ -70,11 +70,12 @@ class LessonListView(ListView):
 		return q
 
 
-
-
 class LessonDetailView(DetailView):
 	model = Lesson
 	template_name = 'courses/lesson_detail.html'
+
+
+	
 
 
 

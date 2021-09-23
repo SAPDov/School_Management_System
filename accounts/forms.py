@@ -16,31 +16,28 @@ class RegisterForm(UserCreationForm):
 		fields = ['username', 'first_name','last_name', 'email', 'password1', 'password2', 'is_student', 'is_teacher']
 
 
+# Send Email After Successfully registered
+
 	def get_info(self):
-		"""
-		Method that returns formatted information
-		:return: subject, msg
-		"""
-		# Cleaned data
+
 		cl_data = super().clean()
-
-		name = cl_data.get('username').strip()
+	
+		fname = cl_data.get('first_name').strip()
+		lname = cl_data.get('last_name')
 		from_email = cl_data.get('email')
-
-		msg = f'{name} with email {from_email}'
-
-
+		
+		msg = f'{fname} {lname} with email {from_email}'
 		return msg
 
 	def send(self):
-
 		msg = self.get_info()
 
 		send_mail(
-			subject='Hello',
+			subject="SchoolMS Sucessfully Registered",
 			message=msg,
 			from_email=settings.EMAIL_HOST_USER,
-			recipient_list=[settings.RECIPIENT_ADDRESS])
+			recipient_list=[settings.RECIPIENT_ADDRESS]
+			)
 
 class UserUpdateForm(forms.ModelForm):
 	class Meta:

@@ -43,8 +43,8 @@ class Lesson(models.Model):
 	def __str__(self):
 		return f'{self.course} {self.start_time}'
 
-	def get_absolute_url(self):
-		return reverse('course:lesson_list', args=(obj.pk, ))
+	# def get_absolute_url(self):
+	# 	return reverse('lesson_detail', kwargs={'pk': self.pk })
 
 class Attendance(models.Model):
 	# course = models.ForeignKey(Course, on_delete=models.CASCADE)

@@ -5,7 +5,7 @@ from courses.models import Course, Lesson, Attendance
 from .models import Teacher
 from students.models import Student
 from django.urls import reverse_lazy
-from .forms import AttendanceFormset, Attendanceform, Lessonform
+from .forms import AttendanceFormset, Attendanceform, LessonForm
 from django.forms import modelformset_factory
 from bootstrap_datepicker_plus import DateTimePickerInput
 
@@ -26,7 +26,7 @@ class CourseListView(ListView):
 
 class LessonCreateView(CreateView):
 	model = Lesson
-	form_class = Lessonform
+	form_class = LessonForm
 	template_name = 'teachers/add_lesson.html'
 	success_url = reverse_lazy('lesson_list')
 
@@ -34,25 +34,33 @@ class LessonCreateView(CreateView):
 		course_id = self.kwargs['pk']
 		return get_object_or_404(Course, id=course_id)
 
+	
 	def get_context(self, **kwargs):
 		context = super().get_context_data(**kwargs)		
 		context['course'] = self.get_course()
 		print(context)
 		return context
 
+
 	def get_form(self):
 		form = super().get_form()
 		form.fields['start_time'].widget = DateTimePickerInput()
 		return form
 
+	def post(self, request, *args, **kwargs):
+		form = LessonForm(request.POST, request.FILES)
+		# lesson = Lesson.objects.get(id=self.kwargs['id'])
+
+		if form.is_valid():
+			return self.form_valid(form)
 
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
 		self.object.teacher = self.request.user.profile()
 		self.object.course = self.get_course()
 		self.object.save()
+		# return redirect('lesson_detail', course.pk )
 		return super().form_valid(form)
-
 
 
 class AttendanceCreateView(CreateView):

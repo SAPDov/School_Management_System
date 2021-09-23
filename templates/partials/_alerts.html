@@ -1,0 +1,21 @@
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %} 
+
+
+<!-- 
+// Messages Function
+// Set the time if message_id greater than 0. Remove the message after 2000 milliseconds i.e. 2 seconds
+ -->
+<script>
+    setTimeout(function(){
+      if ($('#msg').length > 0) {
+        $('#msg').remove();
+      }
+    }, 5000)
+</script> 

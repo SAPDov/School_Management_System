@@ -13,7 +13,7 @@ class TeacherProfileForm(ModelForm):
 		fields = ['phone', 'image', 'address']
 
 
-class Lessonform(ModelForm):
+class LessonForm(ModelForm):
 	class Meta:
 		model = Lesson
 		exclude = ['course']
