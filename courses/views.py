@@ -55,6 +55,7 @@ class CommentCreateView(CreateView):
 		return redirect('course_detail', comment.course.id)
 
 
+
 class LessonListView(ListView):
 	model = Lesson
 

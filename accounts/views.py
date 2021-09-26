@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
-from django.contrib import messages
+from django.views.generic import ListView
 from students.forms import StudentProfileForm
 from teachers.forms import TeacherProfileForm
+from students.models import Student
 from .forms import RegisterForm, UserUpdateForm
 
 
@@ -79,9 +80,29 @@ class ClickView(TemplateView):
 	template_name = 'accounts/click_view.html'
 
 
-class Dashboard(TemplateView):
+class Dashboard(ListView):
 	template_name = 'accounts/dashboard.html'
+	model = Student
+	paginate_by = 2
+	
+# Query a list of students for a specific teacher via course
 
+	def get_queryset(self):
+		if self.request.user.is_teacher:
+			courses = self.request.user.teacher.teacher_courses.all()
+			q = Student.objects.filter(id__in=courses)
+		return q
+
+
+	def get_context_data(self, **kwargs):
+		context = super(Dashboard, self).get_context_data(**kwargs)
+		context['courses'] = self.request.user.teacher.teacher_courses.all()
+		return context
+
+
+
+
+			
 
 	
 
