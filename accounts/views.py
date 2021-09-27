@@ -8,20 +8,26 @@ from teachers.forms import TeacherProfileForm
 from students.models import Student
 from .forms import RegisterForm, UserUpdateForm
 
-
-
 # Create your views here.
-
 
 def register(request):
 	if request.method == 'POST':
-		form = RegisterForm(request.POST)	
+		form = RegisterForm(request.POST)   
 		if form.is_valid():
+			if User.objects.filter(username=form.cleaned_data['username']).exists():
+				messages.errors(request, f'Username already exists')
+			elif User.objects.filter(email=form.cleaned_data['email']).exists():
+				messages.errors(request, f'Email already exists')
+	
+			elif form.cleaned_data['password1'] != form.cleaned_data['password2']:
+				messages.errors(request, f'Passwords do not match')
+		
 			form.save()
 # send a sucessfull email after registration
-			form.send()			
-			username = form.cleaned_data.get('username')
-			password1 = form.cleaned_data.get('password1')
+			form.send()         
+			username = form.cleaned_data['username']
+			password1 = form.cleaned_data['password1']
+
 			user = authenticate(username=username, password1=password1)
 
 			if user:
@@ -31,6 +37,9 @@ def register(request):
 			return redirect('login')
 	else:
 		form = RegisterForm()
+
+
+
 	return render(request, 'accounts/register.html', {'form': form})
 
 @login_required
