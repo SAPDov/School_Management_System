@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'bootstrap_datepicker_plus',
 	'bootstrap4',
+	'widget_tweaks',
 	
 
 ]

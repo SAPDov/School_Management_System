@@ -7,6 +7,8 @@ from students.forms import StudentProfileForm
 from teachers.forms import TeacherProfileForm
 from students.models import Student
 from .forms import RegisterForm, UserUpdateForm
+from django.contrib import messages, auth
+
 
 # Create your views here.
 

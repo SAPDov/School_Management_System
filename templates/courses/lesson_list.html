@@ -3,36 +3,40 @@
 
 
 {% block content %}
+
+
 <body class="page-content">
-	<div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-		<div class="table">
-			<table class="table table-hover">
-			<thead>
-				<tr class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-						<th>Course Name</th>
-						<th>Dates</th>								
+	<!-- start: page -->
+	<section class="panel">
+		
+		<div class="panel-body">
+			<table class="table table-bordered table-striped mb-none" id="datatable-default">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Dates</th>					
 					</tr>
-			</thead >
-			<tbody class="bg-white">
-				<div class="flex items-center">	
-				<div class="flex-shrink-0 w-10 h-10">		
-				{% for lesson in object_list %}
-					<tr class="{% cycle 'row1' 'row2' %}">
-						<td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-							<a class="text-dark" href="{% url 'lesson_detail' lesson.pk %}">
-					  					{{lesson.course}}</td><a/>
-						<td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap" >{{lesson.start_time}} - {{lesson.end_time}} </td>
-						
-						</div>		
-					  </tr>	
-				{% endfor %}
-			</div>
-			</tbody>	
-			</div>
-			</div>
+				</thead>
+				<tbody>
+					<tr class="gradeX">
+					{% for lesson in object_list %}
+							<td>{{lesson.id}}</td>
+						<td><a class="text-dark" href="{% url 'lesson_detail' lesson.pk %}">
+					{{lesson.course}}</td></a>
+						<td>
+					{{lesson.start_time}} - {{lesson.end_time}}
+						</td>	
+					</tr>
+					{% endfor %}
+				</tbody>
+				
+			</table>
 		</div>
-	</div>
+	</section>
 </body>
+
 {% endblock content %}
 
 
+		

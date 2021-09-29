@@ -12,6 +12,7 @@ from .forms import CommentForm
 # All courses
 class CourseListView(ListView):
 	model = Course
+	paginate_by = 3
 
 
 class CourseDetailView(DetailView):
@@ -24,6 +25,7 @@ class CommentCreateView(CreateView):
 	form_class = CommentForm
 	template_name = 'courses/add_comment.html'
 
+#Only students can add comments
 	def get(self, request, *args, **kwargs):
 		if request.user.is_teacher:
 			return redirect('course_detail', kwargs['pk'])
@@ -48,7 +50,6 @@ class CommentCreateView(CreateView):
 		comment = form.save(commit=False)
 		# print(comment)
 		comment.student = self.request.user.profile()
-		# print(self.get_course())
 		comment.course = self.get_course()
 		# print(comment.comments_id)
 		comment.save()

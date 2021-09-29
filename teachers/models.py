@@ -8,6 +8,9 @@ class Teacher(models.Model):
 	phone = models.CharField(max_length=30)
 	address = models.CharField(max_length=200)
 	image = models.ImageField(upload_to='media/', null=True)
+	fb_url = models.CharField(max_length=250, null=True, blank=True)
+	twitter_url = models.CharField(max_length=250, null=True, blank=True)
+	instagram_url = models.CharField(max_length=250, null=True, blank=True)
 
 
 

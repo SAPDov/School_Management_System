@@ -4,97 +4,83 @@
 
 
 {% block content %}
-	
-	<p>Name: {{ object.name }}</p>
-	<p>Description: {{ object.description }}</p>
-
-{% for teacher in object.teacher.all %}
-        <div class="container mt-5">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-7">
-                    <div class="card p-3 py-4">
-                        <div class="text-center"> <img src="{{ teacher.image.url}}" width="100" class="rounded-circle"> </div>
-                        <div class="text-center mt-3">
-<!--                          <span class="bg-secondary p-1 px-4 rounded text-white"></span>
- -->                            <h5 class="mt-2 mb-0">{{teacher.user.first_name}} {{teacher.user.last_name}}</h5> <span>Teacher</span>
-                            <div class="px-4 mt-1">
-                                <p class="fonts">{{teacher.about}} </p>
-                            </div>
-                            <div class="buttons"> <button class="btn btn-outline-primary px-4">Message</
-        
-
-                            button> <button class="btn btn-primary px-4 ms-3">Contact</button> </div>
-                        </div>
-                    </div>
-                </div>
+<div class="row ">
+  <div class="col-md-5 mt-3">
+    <div class="card">
+    <h5 class="mt-1 mb-1">{{ object.name }}</h5>
+    <p>Description: {{ object.description }}</p>
+    </div>
+  </div>
+<div class="col-md-5 mt-3 offset-1">
+    <div class="card">
+    {% for teacher in object.teacher.all %}
+            <div class="text-center"> <img src="{{ teacher.image.url}}" width="100" class="rounded-circle"> </div>
+            <div class="text-center">
+               <h5 class="mt-2 mb-0">{{teacher.user.first_name}} {{teacher.user.last_name}}</h5> 
+                        <div class="px-4 mt-1">
+                    <p class="fonts">{{teacher.about}} </p>
             </div>
         </div>
-{% endfor %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
 <hr>
+  <h5>Comments: ( {{ object.comments.all|length }} )</h5>
+  {% for comment in object.comments.all|slice:":5" %}
+    <div class="container mt-2">
+        <div class="row d-flex justify-content-left">
+            <div class="col-md-8">
+                <div class="headings d-flex justify-content-between align-items-center mb-2"> </div>  
+            <div class="card p-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="user d-flex flex-row align-items-center"> 
+                        <img src="{{comment.student.image.url}}" width="30" class="user-img rounded-circle mr-3"><span>
+                       <p><small class="font-weight-bold text-primary">{{ comment.student }}</small>
+                        <small class="h6">{{ comment.body }}</small>
+                       </p> </span>
+                    </div> <small>{{ comment.date_added }}</small>
+                </div>
+            </div>          
+         </div> 
+        </div>
+        </div>
+    {% endfor %}
 
-	{% for comment in object.comments.all %}
-				
-    	<div class="comment">
-        <div class="date">{{ comment.date_added }}</div>
-        <strong>{{ comment.student }}</strong>
-
-        <p>{{ comment.body|linebreaks }}</p>
-   		 </div>
-    {% empty %}
-    		<p>No comments here yet </p>
-   
-	{% endfor %}
-<a class="btn btn-default" href="{% url 'course_comment' course.pk %}">Add a Comment</a>
-
+        <div class="row">
+          <div class="col-md-6 my-2">
+            <button class="btn btn-link">View All</button>
+          </div>
+        </div>
+{% if user.profile.student %} 
+   <div class="row d-flex justify-content-left">
+    <div class="col-md-8 mt-4">
+        <a href="{% url 'course_comment' course.pk %}" class="btn btn-outline-primary btn-block pull-right"><i class="fas fa-comments"></i> Add Comment</a>
+    </div>
+     </div>
+    
+{% endif %}
+</div> 
 
 {% endblock content %}
 
 
 
 
-<!-- 
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<section class="content-item" id="comments">
-    <div class="container">   
-    	<div class="row">
-            <div class="col-sm-8">   
-                <form>
-                	<h3 class="pull-left">New Comment</h3>
-                	<button type="submit" class="btn btn-normal pull-right">Submit</button>
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-sm-3 col-lg-2 hidden-xs">
-                            	<img class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-9 col-lg-10">
-                                <textarea class="form-control" id="message" placeholder="Your message" required=""></textarea>
-                            </div>
-                        </div>  	
-                    </fieldset>
-                </form>
+
+ <!--    {% for comment in object.comments.all %}
                 
-                <h3>{} Comments</h3>
-                
-               COMMENT 1 - START -->
- <!--                <div class="media">
-                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <ul class="list-unstyled list-inline media-detail pull-left">
-                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-                        <ul class="list-unstyled list-inline media-detail pull-right">
-                            <li class=""><a href="">Like</a></li>
-                            <li class=""><a href="">Reply</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- COMMENT 1 - END -->
-            
-            </div>
-        </div>
-    </div>
-</section>  -->
+        <div class="comment">
+        <div class="date">{{ comment.date_added }}</div>
+        <strong>{{ comment.student }}</strong>
+
+        <p>{{ comment.body|linebreaks }}</p>
+         </div>
+    {% empty %}
+            <p>No comments here yet </p>
+   
+    {% endfor %}
+<a class="btn btn-default" href="{% url 'course_comment' course.pk %}">Add a Comment</a>
+ -->

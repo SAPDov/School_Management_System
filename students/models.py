@@ -13,11 +13,16 @@ class Student(models.Model):
 	phone = models.CharField(max_length=30)
 	image = models.ImageField(upload_to='media/', null=True)
 	address = models.CharField(max_length=100)
-	# lesson = models.ForeignKey(Lesson, null=True, blank=True)
+	about = models.TextField(max_length=500, null=True, blank=True)
+	fb_url = models.CharField(max_length=250, null=True, blank=True)
+	twitter_url = models.CharField(max_length=250, null=True, blank=True)
+	instagram_url = models.CharField(max_length=250, null=True, blank=True)
+
+
 
 
 	def __str__(self):
-		return self.user.username
+		return f'{self.user.first_name} {self.user.first_name}'
 
 
 @receiver(post_save, sender=CustomUser)

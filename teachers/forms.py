@@ -10,28 +10,28 @@ from bootstrap_datepicker_plus import DateTimePickerInput, TimePickerInput
 class TeacherProfileForm(ModelForm):
 	class Meta:
 		model = Teacher
-		fields = ['phone', 'image', 'address']
+		fields = ['phone', 'image', 'address', 'about', 'fb_url', 'twitter_url', 'instagram_url']
 
 
 class LessonForm(ModelForm):
 	class Meta:
 		model = Lesson
-		exclude = ['course']
+		fields = '__all__'
 		start_time = forms.DateTimeField(
 			widget = DateTimePickerInput(format='%m/%d/%Y %H:%M'))
 			
 
 
-			  # default date-format %m/%d/%Y will be used
-			# 'end_date': TimePickerInput(format='%m/%d/%Y') # specify date-frmat
-		
-	
-
 class Attendanceform(ModelForm):
+
+	def __init__(self, *args, **kwargs):
+		super(Attendanceform, self).__init__(*args, **kwargs)
+		self.fields['status'].widget.attrs['student'] = True
+			
 	class Meta:
 		model = Attendance
-		fields = ['lesson', 'student','status']
-
+		fields = ['lesson', 'student', 'status']
 
 AttendanceFormset = modelformset_factory(Attendance, fields=['student','status'])
 
+	

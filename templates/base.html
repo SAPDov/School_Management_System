@@ -26,20 +26,24 @@
 
 	
 
-
-
 	 <title>{% block title %} SchoolMS | {% endblock title %}</title>
 </head>
 <body>		
 		<!-- SIDEBAR Content  -->
 		<div class="body-pd">
 			{% include 'partials/sidebar.html' %}
+		</div>		
+
+		<!--  Messages -->
+	    	{% include "partials/_alerts.html" %}
+
+		<!--Container Main start-->
+		<div class="page-content">
+			{% block content %} {% endblock content %}
 		</div>
-	<!--Container Main start-->
-	<div class="page-content">
-		{% block content %} {% endblock content %}
-	</div>
-	<!--Container Main end-->
+		<!--Container Main end-->
+
+
 		
 	<!-- jQuery Library-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -55,7 +55,7 @@ class Attendance(models.Model):
 	status = models.BooleanField(default='True')
 
 	def __str__(self):
-		return f'{self.student} {self.course} {self.status}'
+		return f'{self.course} {self.status}'
 
 class Comment(models.Model):
 	course = models.ForeignKey(Course, null=True, on_delete=models.CASCADE, related_name='comments')
