@@ -8,8 +8,9 @@ from django.conf import settings
 
 class RegisterForm(UserCreationForm):
 	email = forms.EmailField(required=True)
-	is_student = forms.BooleanField(label='Student',required=False)
-	is_teacher = forms.BooleanField(label='Teacher', required=False)
+	is_student = forms.BooleanField(label='I am a Student',required=False)
+	is_teacher = forms.BooleanField(label='I am a Teacher', required=False)
+
 					
 	class Meta:
 		model = CustomUser

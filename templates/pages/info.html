@@ -2,24 +2,17 @@
  {% load static %}
 
 {% block content %}
-<!-- 
-<div class=container>
-<div class="card-group">
 
-  <div class="card">
-    <img src="{% static 'img/default.jpeg' %}" class="rounded-circle p-1 bg-primary" width="250" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Login</h5>
-      <p class="card-text"></p>
-      <a href="{% url 'click' %}" class="btn btn-dark">View</a>
-    </div>
+<div class="jumbotron d-flex align-items-center">
+  <div class="container text-center">
+    <h1 class="display-4">Hello </h1>
+    <p class="lead">Welcome to Online School Management System</p>
+    <hr class="my-4">
+    <p>How do you want to proceed? </p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Register</a>
+      <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+    </p>
   </div>
 </div>
-</div>
-  <footer id="main-footer" class="py-4 bg-primary text-white text-center">
-    Copyright &copy;
-    <span class="year"></span> 2021 SapDov
-  </footer>
- -->
-
 {% endblock content %}

@@ -7,7 +7,6 @@ urlpatterns = [
     path('register', views.register, name='register'),
    	path("profile", views.profile, name='profile'),
    	path("edit_profile", views.edit_profile, name='edit_profile'),
-   	path("click", ClickView.as_view(), name='click'),
    	path('dashboard', Dashboard.as_view(), name='dashboard'),
 
    	# path("login_redirect", views.login_redirect, name='login_redirect'),

@@ -4,6 +4,11 @@ from courses.models import Course
 from .models import Student
 
 
+class StudentListView(ListView):
+	model = Student
+	template_name = 'students/all_students.html'
+	paginate_by = 10
+
 
 
 class CourseListView(ListView):

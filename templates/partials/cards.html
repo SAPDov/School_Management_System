@@ -1,3 +1,4 @@
+
   <style type="text/css">
     a:link {
       text-decoration: none;
@@ -54,6 +55,8 @@
 
 <body>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
   <div class="container">
     <div class="row">
       <div class="col-md-4 col-xl-3">
@@ -66,15 +69,20 @@
         </div>
       </div>
 
+ {% for student in object_list %}
+      {% if forloop.last %} 
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-green order-card">
           <div class="card-block">
             <h6 class="m-b-20">Total Student</h6>
-            <h2 class="text-right"><i class="fas fa-user-graduate f-left"></i><span>{{studentcount}}</span></h2>
-            <p class="m-b-0">Pending Students<span class="f-right">{{pendingstudentcount}}</span></p>
+            <h2 class="text-right"><i class="fas fa-user-graduate f-left"></i><span>
+              </span></h2>
+            <p class="m-b-0"><span class="f-right"></span></p>
           </div>
         </div>
       </div>
+      {% endif %}
+  {% endfor %}
 
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-yellow order-card">

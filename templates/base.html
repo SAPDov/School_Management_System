@@ -21,22 +21,19 @@
 	<!--  Static css -->
 	<link rel="stylesheet" type='text/css' href="{% static 'css/style.css' %}">
 
-	<!--  Static css -->
-	<link rel="stylesheet" type='text/css' href="{% static 'css/normalize.css' %}">
-
-	
 
 	 <title>{% block title %} SchoolMS | {% endblock title %}</title>
 </head>
-<body>		
-		<!-- SIDEBAR Content  -->
-		<div class="body-pd">
-			{% include 'partials/sidebar.html' %}
-		</div>		
-
+<body>	
+	{% if user.is_authenticated %}	
+			<!-- SIDEBAR Content  -->
+			<div class="body-pd">
+				{% include 'partials/sidebar.html' %}
+			</div>		
+	{% endif %}
+	
 		<!--  Messages -->
 	    	{% include "partials/_alerts.html" %}
-
 		<!--Container Main start-->
 		<div class="page-content">
 			{% block content %} {% endblock content %}

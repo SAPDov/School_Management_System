@@ -1,64 +1,101 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load widget_tweaks %}
 
 {% block content %}
-    <div id="content-container" class="container p-none">
-      <div class="login">
-        <form action="{% url 'register' %}" method="post">
-                      {% if error_message %}
-                            <p class="bg-danger p-d ml-b">{{ error_message }}</p>
-                        {% endif %}
-                       
-            {% csrf_token %}
-            <table class="table">
-              <tr>
-                <td><label for="id_username">Username</label></td>
-                <td><input id="id_username" name="username" 
-                  type="text" class="form-control"></td>
-                 </tr>
+        {% include "partials/_alerts.html" %}
 
-                   <tr>
-                <td><label for="id_first_name">First Name</label></td>
-                <td><input id="id_first_name" name="first_name" 
-                  type="text" class="form-control"></td>
-                 </tr>
-                <tr>
-                <td><label for="id_last_name">Last Name</label></td>
-                <td><input id="id_last_name" name="last_name" 
-                  type="text" class="form-control"></td>
-                 </tr>
-               <tr>
-                <td><label for="id_email">Email</label></td>
-                <td><input id="id_email" name="email" 
-                  type="text" class="form-control"></td>
-                 </tr>
-              <tr>
-                      <td><label for="id_password1">Password</label></td>
-                      <td><input id="id_password1" name="password1" 
-                              type="password" class="form-control"></td>
-                    </tr>    
-                    <tr>
-                      <td><label for="id_password2">Repeat Password</label></td>
-                      <td><input id="id_password2" name="password2" 
-                              type="password" class="form-control"></td>
-                    </tr>
-         </table>
-             <p><label for="id_is_student">Student</label>
-                <input id="id_is_student" name="student" 
-                  type="checkbox"></p>
-                <p><label for="id_is_teacher">Teacher</label>
-                <input id="id_is_teacher" name="teacher" 
-                  type="checkbox"></p><br>
+  <section class="vh-100" style="background-color: #eee;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                <input type="submit" value="Register" 
-                       class="btn btn-primary pull-right" />
-                <input type="hidden" name="next" value="{{next}}" />
-          Already have An Account? <a href="{% url 'login' %}">Login</a>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-        </form>
-        <br>
-   
+                <form class="mx-1 mx-md-4" action="{% url 'register' %}" method="post">{% csrf_token %}
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                    {% render_field form.username class="form-control"|add_label_class="form-label" type="input" placeholder="Username" %}
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="name">
+                   
+                    <div class="form-outline flex-fill mb-0">
+                    {% render_field form.first_name class="form-control"|add_label_class="form-label" type="input" placeholder="First Name" %}
+                    </div>
+                  </div>
+                  <div class="name">
+                  
+                    <div class="form-outline flex-fill mb-0">
+                    {% render_field form.last_name class="form-control"|add_label_class="form-label" type="input" placeholder="Last Name" %}
+                    </div>
+                  </div>
+
+                  </div>
+                  
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      {% render_field form.email class="form-control"|add_label_class="form-label" type="email" placeholder="Email" %}
+
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      {% render_field form.password1 class="form-control"|add_label_class="form-label" type="password" placeholder="Password" %}
+                    
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      {% render_field form.password2 class="form-control"|add_label_class="form-label" type="password" placeholder="Repeat Password" %}
+                    </div>
+                  </div>
+                  <div class="form-check d-flex justify-content-center mb-4">
+                  <div class="form-check d-flex justify-content-center ">
+                      {% render_field form.is_student class="form-check-input me-2" type="checkbox" %}
+                      {{form.is_student.label}}
+
+                  </div><br><br>
+           
+                 <div class="form-check d-flex justify-content-center mx-2">
+                      {% render_field form.is_teacher class="form-check-input me-2" type="checkbox" %}
+                      {{form.is_teacher.label}}
+
+                  </div>
+                  </div>
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <input type="submit" value="Register" 
+                          class="btn btn-primary pull-right" /></div>
+                      <input type="hidden" name="next" value="{{next}}" /> Already have An Account? <a href="{% url 'login' %}">Login</a>
+                  
+
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/draw1.png" class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 {% endblock %}

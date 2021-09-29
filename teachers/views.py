@@ -10,6 +10,12 @@ from django.forms import modelformset_factory
 from bootstrap_datepicker_plus import DateTimePickerInput
 
 
+class TeacherListView(ListView):
+	model = Teacher
+	template_name = 'teachers/all_teachers.html'
+	paginate_by = 10
+
+
 
 class CourseListView(ListView):
 	model = Course

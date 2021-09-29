@@ -4,28 +4,35 @@
 
 
 {% block content %}
- <form  action="" method="POST" enctype="multipart/form-data">
-	{% csrf_token %}
-		{{ formset.management_form }}
- 		<h1>check</h1> 
-<div class='container'>
-    {% for form in formset %}
-<div class="row">
-    <div class="col">
-
-        {{ form.student|attr:"disabled:True"|add_class:"form-control" }}
-    </div>
-    <div class="col">
-        {% render_field form.status|add_class:"input-group-mb-3 input-group-prepend input-group-text" type="checkbox" %}  
-    </div>
-
-   
-   </div> 
-{% endfor %} 
- </div>
-  
-    <br><br>
-    <button type="submit">Submit</button> 
-</form>
+<body class="page-content">
+    <!-- start: page -->
+    <section class="panel">
+        <form  action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            {{ formset.management_form }}
+            <div class="panel-body">
+                <table class="table table-bordered table-striped mb-none w-auto" id="datatable-default">
+                    <thead>
+                        <tr>
+                            
+                            <th>Name</th>
+                            <th>Present</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="gradeX">
+                            {% for form in formset %}
+                                <td>{{ form.student|attr:"disabled:True"|add_class:"form-control" }}</td>
+                                <td class="text-center">{% render_field form.status|add_class:"form-check-input" %}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button class="btn btn-primary pull-right" type="submit">Submit</button>
+            </div>
+        </section>
+        
+    </form>
+</body>
 {% endblock content %}
+
 

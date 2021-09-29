@@ -1,49 +1,45 @@
 {% load static %}
 
 
-<body id="body-pd">
-  <header class="header" id="header">
-    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-      <div class="header_name" >Welcome, {{user.first_name}}</div>
-  {% if user.profile.image %}
-    <div class="header_img"> <img src="{{user.profile.image.url}}" alt=""> </div>
-  {% else %}
-    <div class="header_img"> <img src="{% static 'img/default.jpeg'%}" alt=""> </div>
-  {% endif %}
-  </header>
-  
-  <div class="l-navbar" id="nav-bar">
-    <nav class="nav">
-      <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">SchoolMS</span> </a>
-
-      <div class="nav_list">
-        <a href="{% url 'dashboard' %}" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i>
-        <span class="nav_name">Dashboard</span> </a>
-        
-        <a href="{%url 'profile' %}" class="nav_link"> <i class='bx bx-user nav_icon'></i>
-        <span class="nav_name">Profile</span> </a>
-
-
-        <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i>
-        <span class="nav_name">Messages</span> </a>
-    {% if user.is_student %}
-        <a href="{% url 's_course_list' %}" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
-         <span class="nav_name">Courses</span></a> 
-    {% elif user.is_teacher %}
-        <a href="{% url 't_course_list' %}" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
-         <span class="nav_name">Courses</span></a> 
-
-        
-
-        <a href="{% url 'lesson_list' %}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i>
-         <span class="nav_name">Lessons</span></a> 
-    </li>
+  <body id="body-pd">
+    <header class="header" id="header">
+      <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        <div class="header_name" >Welcome, {{user.first_name}}</div>
+    {% if user.profile.image %}
+      <div class="header_img"> <img src="{{user.profile.image.url}}" alt=""> </div>
+    {% else %}
+      <div class="header_img"> <img src="{% static 'img/default.jpeg'%}" alt=""> </div>
     {% endif %}
+    </header>
+    
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">SchoolMS</span> </a>
 
-         <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
-        <span class="nav_name">Stats</span> </a> </div>
+        <div class="nav_list">
+          <a href="{% url 'dashboard' %}" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i>
+          <span class="nav_name">Dashboard</span> </a>
+          
+          <a href="{%url 'profile' %}" class="nav_link"> <i class='bx bx-user nav_icon'></i>
+          <span class="nav_name">Profile</span> </a>
+
+
+      {% if user.is_student %}
+          <a href="{% url 's_course_list' %}" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
+           <span class="nav_name">Courses</span></a> 
+      {% elif user.is_teacher %}
+          <a href="{% url 't_course_list' %}" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
+           <span class="nav_name">Courses</span></a> 
+
+          
+
+          <a href="{% url 'lesson_list' %}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i>
+           <span class="nav_name">Lessons</span></a> 
+      </li>
+      {% endif %}
+   </div>
+        </div>
+          <a href="{% url 'logout' %}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+        </nav>
       </div>
-        <a href="{% url 'logout' %}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-      </nav>
-    </div>
-</body>
+  </body>

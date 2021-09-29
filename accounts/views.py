@@ -6,8 +6,10 @@ from django.views.generic import ListView
 from students.forms import StudentProfileForm
 from teachers.forms import TeacherProfileForm
 from students.models import Student
+from django.contrib.auth.models import User
+from .models import CustomUser
 from .forms import RegisterForm, UserUpdateForm
-from django.contrib import messages, auth
+from django.contrib import messages
 
 
 # Create your views here.
@@ -16,14 +18,13 @@ def register(request):
 	if request.method == 'POST':
 		form = RegisterForm(request.POST)   
 		if form.is_valid():
-			if User.objects.filter(username=form.cleaned_data['username']).exists():
+			if CustomUser.objects.filter(username=form.cleaned_data['username']).exists():
 				messages.errors(request, f'Username already exists')
-			elif User.objects.filter(email=form.cleaned_data['email']).exists():
+			elif CustomUser.objects.filter(email=form.cleaned_data['email']).exists():
 				messages.errors(request, f'Email already exists')
 	
 			elif form.cleaned_data['password1'] != form.cleaned_data['password2']:
-				messages.errors(request, f'Passwords do not match')
-		
+				messages.errors(request, f'Passwords do not match')		
 			form.save()
 # send a sucessfull email after registration
 			form.send()         
@@ -34,7 +35,6 @@ def register(request):
 
 			if user:
 				login(request, user)
-
 				messages.success(request, f'Your account has been created! You are now able to log in')
 			return redirect('login')
 	else:
@@ -94,25 +94,28 @@ class ClickView(TemplateView):
 class Dashboard(ListView):
 	template_name = 'accounts/dashboard.html'
 	model = Student
-	paginate_by = 2
-	
+
 # Query a list of students for a specific teacher via course
 
 	def get_queryset(self):
 		if self.request.user.is_teacher:
 			courses = self.request.user.teacher.teacher_courses.all()
 			q = Student.objects.filter(id__in=courses)
-		return q
-
+			return q
+		elif self.request.user.is_student:
+			courses = self.request.user.student.student_courses.all() 
+			return courses
 
 	def get_context_data(self, **kwargs):
 		context = super(Dashboard, self).get_context_data(**kwargs)
-		context['courses'] = self.request.user.teacher.teacher_courses.all()
-		return context
+		if self.request.user.is_teacher:
+			context['courses'] = self.request.user.teacher.teacher_courses.all()
+			return context
+		elif self.request.user.is_student:
+			context['courses'] = self.request.user.student.student_courses.all()
+			return context
 
-
-
-
+	
 			
 
 	

@@ -24,10 +24,6 @@ class LessonForm(ModelForm):
 
 class Attendanceform(ModelForm):
 
-	def __init__(self, *args, **kwargs):
-		super(Attendanceform, self).__init__(*args, **kwargs)
-		self.fields['status'].widget.attrs['student'] = True
-			
 	class Meta:
 		model = Attendance
 		fields = ['lesson', 'student', 'status']

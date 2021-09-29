@@ -3,9 +3,13 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <div id="content-container" class="container p-none">
-        <div class="lgn-container col-lg-8">
-            <form id="login-form" method="post" 
+<div class="content">
+<div class="login">
+    <div class="login-triangle">
+ </div> 
+ <h2 class="login-header">
+Log in</h2>  
+    <form class="login-container" method="post" 
                   action="{% url 'login' %}">
                 		{% csrf_token %}
                 <table class="table">
@@ -28,9 +32,10 @@
                 {% endif %}
 
                 <input type="submit" value="Login" 
-                       class="btn btn-primary pull-right" />
+                       class="btn btn-primary bth-lg pull-right" />
                 <input type="hidden" name="next" value="{{next}}" />
-            </form>
-        </div>
-    </div>
+  </form>
+</div>
+</div>
 {% endblock content %}
+
