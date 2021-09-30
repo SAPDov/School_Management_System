@@ -94,13 +94,13 @@ class ClickView(TemplateView):
 class Dashboard(ListView):
 	template_name = 'accounts/dashboard.html'
 	model = Student
-
+	paginate_by = 3 
 # Query a list of students for a specific teacher via course
 
 	def get_queryset(self):
 		if self.request.user.is_teacher:
-			courses = self.request.user.teacher.teacher_courses.all()
-			q = Student.objects.filter(id__in=courses)
+			courses_queryset = self.request.user.teacher.teacher_courses.all()
+			q = Student.objects.filter(student_courses__in=courses_queryset)
 			return q
 		elif self.request.user.is_student:
 			courses = self.request.user.student.student_courses.all() 

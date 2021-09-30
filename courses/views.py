@@ -59,6 +59,8 @@ class CommentCreateView(CreateView):
 
 class LessonListView(ListView):
 	model = Lesson
+	
+
 
 	def get_queryset(self):
 		if self.request.user.is_teacher:

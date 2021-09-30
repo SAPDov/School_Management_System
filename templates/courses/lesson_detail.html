@@ -6,8 +6,7 @@
 
 {% block content %}
 <body class="page-content">
-	<p>Course: {{ object.course }}</p>
-	<p>Date: {{ object.course__start_time }}</p>
+
 
     <div class="container">
         <div class="container-fluid p-0">
@@ -48,10 +47,10 @@
 
                            {% if object|has_attendance:student == 'N' %}
                                             <td>No attendance</td>
-
+                                       
                              
                                              
-                            {% elif object|has_attendance:student %}
+                                {% elif object|has_attendance:student %}
 
                                         <td><span class="badge bg-success">Present</span></td>
                                 {% else %}
@@ -63,10 +62,17 @@
 
                                 </tbody>
                                 
-                            {% endfor %}
-                       
+                            
+                                {% endfor %}
                             </table>
-                        <a href="{% url 'add_attendance' object.pk %}" class="text-indigo-600 hover:text-indigo-900">Add attendance</a>
+                         {% for student in object.course.student.all|slice:":1" %} 
+                             {% if object|has_attendance:student == 'N' %}
+                                    <div class="h-100">
+                                    <a href="{% url 'add_attendance' object.pk %}"><button class="btn btn-primary pull-right" type="submit">Add attendance</button></a>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        
                         </div>
                     </div>
             </div>

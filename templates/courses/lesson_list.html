@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
-
+{% load mytags %}
 {% block content %}
 
 
@@ -15,23 +14,31 @@
 					<tr>
 						<th>Id</th>
 						<th>Name</th>
-						<th>Dates</th>					
+						<th>Dates</th>
+
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="gradeX">
 					{% for lesson in object_list %}
-							<td>{{lesson.id}}</td>
+						{% if lesson|has_attendance:student == 'N' %}
+							<td class="table-info">{{lesson.id}}</td>
+						{% else %}
+							<td >{{lesson.id}}</td>
+						{% endif %}
+						
 						<td><a class="text-dark" href="{% url 'lesson_detail' lesson.pk %}">
 					{{lesson.course}}</td></a>
 						<td>
 					{{lesson.start_time}} - {{lesson.end_time}}
 						</td>	
 					</tr>
+					
 					{% endfor %}
 				</tbody>
 				
 			</table>
+			
 		</div>
 	</section>
 </body>

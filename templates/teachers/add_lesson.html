@@ -1,26 +1,41 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 
 
 {% block content %}
+
 {% load bootstrap4 %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {{ form.media }}
+<body class="page-content">
+	<div class="breadcrumbs-area"> 
+          
+       <nav aria-label="breadcrumb">
+ 		 <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="#">Home</a></li>
+	    <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Add Lesson</li>
+  	</ol>
+  <div class="h-100">
+	<div class="h100">
+    <h1>Add Lesson</h1>
+    	<form action="" method="POST"> {% csrf_token %} 
 
-    <h1>New comment</h1>
-    <form action="" method="POST"> {% csrf_token %} 
-	
  		 {% bootstrap_form form %}
+ 		 {}
    
  
     
         {% buttons %}
-			<button type="submit" class="btn btn-primary" value="vote">Save</button>
+			<button type="submit" class="btn btn-primary btn-lg" value="vote">Save</button>
 		{% endbuttons %}
          
     </form>
-
+</div>
+</div>
+</body>
 
 {% endblock content %}

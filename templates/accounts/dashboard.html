@@ -34,16 +34,16 @@
           {% if user.is_student %}
 
                     <div class="col-sm-6 col-md-4 p-4 text-center btn-wrapper">
-                      <button type="button" class="btn px-0"><i class="fas fa-user-tie"><a href="{% url 'all_teachers' %}"></i>View Teachers</button></a>
+                      <button type="button" class="btn px-0"><i class="fas fa-user-tie"><a href="{% url 'all_teachers' %}"></i>All Teachers</button></a>
                     </div>
                 {% endif %}
                     <div class="col-sm-6 col-md-4 p-4 text-center btn-wrapper">
-                      <button type="button" class="btn px-0"><i class="fas fa-folder"><a href="{% url 'all_students' %}"></i>View students</button></a>
+                      <button type="button" class="btn px-0"><i class="fas fa-folder"><a href="{% url 'all_students' %}"></i>All students</button></a>
                     </div>
 
           {% if user.is_teacher %}
            <div class="col-sm-6 col-md-4 p-4 text-center btn-wrapper">
-                      <button type="button" class="btn px-0"><i class="fas fa-user"><a href="{% url 'add_lesson' %}"></i>Add Lesson</button></a>
+                      <button type="button" class="btn px-0"><i class="fas fa-user"><a href="{% url 't_course_list' %}"></i>Add Lesson</button></a>
                   </div>
           {% endif %}
 
@@ -116,7 +116,8 @@
                           </tr>
                         </thead>
                         <tbody>
-                        {% for student in object_list %} 
+                   
+                         {% for student in object_list %} 
                           <tr>
                             <td>{{student.user.id}}</td>
                             
@@ -134,6 +135,7 @@
                         
                         </tbody>
                         {% endfor %}
+                    
 
                       </table>
                     </div>

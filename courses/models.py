@@ -43,6 +43,9 @@ class Lesson(models.Model):
 	def __str__(self):
 		return f'{self.course} {self.start_time}'
 
+	class Meta:
+		ordering = ['-id']
+
 	# def get_absolute_url(self):
 	# 	return reverse('lesson_detail', kwargs={'pk': self.pk })
 

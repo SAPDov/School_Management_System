@@ -16,6 +16,8 @@
 						<th>Dates</th>
 						<th>Price</th>
 						<th>Total Students</th>
+						<th>Action</th>
+
 										
 					</tr>
 				</thead>
@@ -29,12 +31,15 @@
 						</td>
 						<td>{{course.price}} $</td>
 						<td>{{ course.student.all|length }}</td>
+						<td> <a href="{% url 'add_lesson' course.pk %}"><button type="submit" class="btn btn-primary " value="vote">Add Lesson</button></a></td>
 
 					</tr>
-					{% endfor %}
-					<a href="{% url 'add_lesson' %}">Add Lesson</a>
+					{% endfor %}		
 				</tbody>
+				
 			</table>
+		
+		</div>
 		</div>
 	</section>
 </body>
