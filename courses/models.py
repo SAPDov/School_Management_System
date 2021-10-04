@@ -34,7 +34,6 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
-
 	course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.SET_NULL, related_name='lessons')
 	start_time = models.DateTimeField()
 	end_time = models.TimeField(null=True, blank=True)

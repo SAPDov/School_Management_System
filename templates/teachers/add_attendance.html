@@ -7,7 +7,8 @@
 <body class="page-content">
     <!-- start: page -->
     <section class="panel">
-        <form  action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <form  action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             {{ formset.management_form }}
             <div class="panel-body">
                 <table class="table table-bordered table-striped mb-none w-auto" id="datatable-default">
@@ -21,7 +22,7 @@
                     <tbody>
                         <tr class="gradeX">
                             {% for form in formset %}
-                                <td>{{ form.student|attr:"disabled:True"|add_class:"form-control" }}</td>
+                                <td>{{ form.student|add_class:"form-control" }}</td>
                                 <td class="text-center">{% render_field form.status|add_class:"form-check-input" %}</td>
                             </tr>
                         {% endfor %}

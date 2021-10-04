@@ -16,7 +16,6 @@ class TeacherListView(ListView):
 	paginate_by = 10
 
 
-
 class CourseListView(ListView):
 	model = Course
 	template_name = 'teachers/teacher_course_list.html'
@@ -38,14 +37,19 @@ class LessonCreateView(CreateView):
 
 	def get_course(self):
 		course_id = self.kwargs['pk']
+		# print(course_id)
 		return get_object_or_404(Course, id=course_id)
 
-	
-	def get_context(self, **kwargs):
-		context = super().get_context_data(**kwargs)		
-		context['course'] = self.get_course()
-		print(context)
-		return context
+	# def get_queryset(self):
+	# 	w = self.request.user.teacher.teacher_courses.all()
+	# 	print(w)
+	# 	return w
+		
+	# def get_context(self, **kwargs):
+	# 	context = super().get_context_data(**kwargs)		
+	# 	context['courses'] = self.get_course()
+	# 	print(context)
+	# 	return context
 
 
 	def get_form(self):
@@ -63,7 +67,7 @@ class LessonCreateView(CreateView):
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
 		self.object.teacher = self.request.user.profile()
-		self.object.course = self.get_course()
+		# self.object.course = self.get_course()
 		self.object.save()
 		# return redirect('lesson_detail', course.pk )
 		return super().form_valid(form)
@@ -108,80 +112,4 @@ class AttendanceCreateView(CreateView):
 		return redirect('lesson_list')
 
 
-
-
-	# def add_attendance(request):
-	
-	# 	formset = AttendanceFormset(queryset=Attendance.objects.none())
-	# 	# request.user.profile.animal_set.all()
-	# 	# Animal.objects.filter(created_by = request.user.profile)
-	# 	if request.method == 'POST':
-	# 		formset = AttendanceFormset(request.POST, queryset=request.user.profile.attendance_set.all())
-	# 		if formset.is_valid():
-	# 			for form in formset:
-				
-	# 				if form.cleaned_data:
-	# 					status = form.save(commit=False)
-	# 					status.teacher = request.user.profile
-	# 					status.save()
-	# 			return redirect('lesson_detail', attendance.lesson.id)
-	# 	return render(request, 'add_attendance.html', {'formset':formset}) 
-
-
-
-
-	# def get(self, request, *args, **kwargs):
-	# 	if self.request.user.is_student:
-	# 		return redirect('s_course_list')
-	# 	return super().get(request, *args, **kwargs)
-
-
-
-
-
-
-
-
-	
-# 	# def get_lesson(self):
-# 	# 	lesson_id = self.kwargs['pk']
-# 	# 	return get_object_or_404(Lesson, id=lesson_id)
-
-# 	# def get_course(self):
-# 	# 	course_id = self.kwargs['pk']
-# 	# 	return get_object_or_404(Course, id=course_id)
-
-
-# 	def get_context_data(self, **kwargs):
-# 		context = super(AttendanceCreateView, self).get_context_data(**kwargs)
-# 		context['formset'] = AttendanceFormset(queryset=Attendance.objects.none(), instance=Teacher.objects.get(id=self.request.user.id), initial=[{'student': student} for student in self.get_initial()['students']])
-
-# 		return context
-
-# 	def get_initial(self):
-# 		teacher_id = self.request.user.id
-# 		teacher = Teacher.objects.get(id=teacher_id)
-# 		initial = super(AttendanceCreateView, self).get_initial()
-# 		initial['students'] = Student.objects.all()
-# 		return initial
-
-
-# 	def form_valid(self, formset):
-# 		attendance = formset.save(commit=False)
-# 		# attendance.lesson = self.get_lesson()
-# 		# attendance.course = self.get_course()
-# 		attendance.save()
-# 		return redirect('lesson_detail', attendance.lesson.id)
-
-
-# 	# def form_valid(self, formset):
-# 	# 	comment = form.save(commit=False)
-# 	# 	# print(comment)
-# 	# 	comment.student = self.request.user.profile()
-# 	# 	# print(self.get_course())
-# 	# 	comment.course_name = self.get_course()
-# 	# 	# print(comment.comments_id)
-# 	# 	comment.save()
-# 	# 	return redirect('course_detail', comment.course_name.id)
-# # success_url = reverse_lazy('lesson_detail')
 

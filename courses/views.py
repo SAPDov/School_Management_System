@@ -59,24 +59,33 @@ class CommentCreateView(CreateView):
 
 class LessonListView(ListView):
 	model = Lesson
-	
-
 
 	def get_queryset(self):
 		if self.request.user.is_teacher:
 			courses = self.request.user.teacher.teacher_courses.all()
 			q = Lesson.objects.filter(course__in=courses)
-			print(q)
+			# print(q)
 		else:
 			courses = self.request.user.student.student_courses.all()
 			q = Lesson.objects.filter(course__in=courses)
-			print(q)
+			# print(q)
 		return q
+
+
+	# def get_context_data(self, **kwargs):
+	# 	context = super().get_context_data(**kwargs)
+	# 	context['attendance'] = self.request.user.
+	# 	return context
+
 
 
 class LessonDetailView(DetailView):
 	model = Lesson
 	template_name = 'courses/lesson_detail.html'
+
+
+
+
 
 
 	

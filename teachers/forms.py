@@ -16,9 +16,21 @@ class TeacherProfileForm(ModelForm):
 class LessonForm(ModelForm):
 	class Meta:
 		model = Lesson
-		fields = '__all__'
+		fields = ['course', 'start_time', 'end_time']
 		start_time = forms.DateTimeField(
-			widget = DateTimePickerInput(format='%m/%d/%Y %H:%M'))
+					widget = DateTimePickerInput(format='%m/%d/%Y %H:%M'))
+		widgets = {
+			'course': forms.HiddenInput,
+		}
+
+
+# overide the form - exculde the course field 
+		def __init__(self, *args, **kwargs):
+			super(LessonForm, self).__init__(*args, **kwargs)
+			inital = kwargs.get('initial')
+			course = inital.get('course')
+			
+
 			
 
 

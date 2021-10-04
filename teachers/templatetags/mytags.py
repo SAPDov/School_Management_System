@@ -7,3 +7,6 @@ def has_attendance(lesson, student):
 	if has_attended.exists():	
 		return has_attended.first().status 
 	return 'N'
+
+
+

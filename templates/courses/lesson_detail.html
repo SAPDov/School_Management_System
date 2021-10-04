@@ -5,9 +5,9 @@
 
 
 {% block content %}
-<body class="page-content">
 
-
+    <p>Course: {{ object.course }}</p>
+    <p>Date: {{ object.course__start_time }}</p>
     <div class="container">
         <div class="container-fluid p-0">
             <h1 class="h3 mb-3">Students</h1>
@@ -17,7 +17,6 @@
                         <div class="card-header pb-0">
                             <div class="card-actions float-right">
                                 <div class="dropdown show">
-
                                 </div>
                             </div>
                         </div>
@@ -31,55 +30,44 @@
                                         <th>Email</th>
                                         <th>Status</th>
                                     </tr>
-                                </thead> 
-                    {% for student in object.course.student.all %} 
+                                </thead>
+                                {% for student in object.course.student.all %}
+                                    <tbody>
+                                        <tr>
+                                            {% if student.image %}
+                                                   <td><img src="{{student.image.url}}" width="32" height="32" class="rounded-circle my-n1" alt="image"></td>
+                                            {% else %}
+                                                <td><img src="{% static 'img/default.jpeg'%}" width="32" height="32" class="rounded-circle my-n1" alt="image"></td>
+                                            {% endif %}
+                                    <td> {{student.user.first_name}} {{student.user.last_name}}</td>
+                                               <td>{{student.phone}}</td>
+                                                <td>{{student.user.email}}</td>
+                                             {% if object|has_attendance:student == 'N' %}
+                                                    <td>No attendance</td>
+                                                    
+                                             {% elif object|has_attendance:student %}
+                                                    <td><span class="badge bg-success">Present</span></td>
+                                                {% else %}
+                                                    <td><span class="badge bg-danger">Absent</span></td>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody> 
 
-                                <tbody>
-                                    <tr>
-                            {% if student.image %}
-                                <td><img src="{{student.image.url}}" width="32" height="32" class="rounded-circle my-n1" alt="image"></td>
-                            {% else %}
-                                <td><img src="{% static 'img/default.jpeg'%}" width="32" height="32" class="rounded-circle my-n1" alt="image"></td>
-                            {% endif %}
-                                        <td> {{student.user.first_name}} {{student.user.last_name}}</td>
-                                        <td>{{student.phone}}</td>
-                                        <td>{{student.user.email}}</td>
-
-                           {% if object|has_attendance:student == 'N' %}
-                                            <td>No attendance</td>
-                                       
-                             
-                                             
-                                {% elif object|has_attendance:student %}
-
-                                        <td><span class="badge bg-success">Present</span></td>
-                                {% else %}
-                                        <td><span class="badge bg-danger">Absent</span></td>
+                                {% endfor %}  
                                
-                            {% endif %}
-                          
-                                    </tr>
+                            </table> 
+                              {% for student in object.course.student.all|slice:":1" %}
+                                    {% if object|has_attendance:student == 'N' %}
 
-                                </tbody>
-                                
-                            
-                                {% endfor %}
-                            </table>
-                         {% for student in object.course.student.all|slice:":1" %} 
-                             {% if object|has_attendance:student == 'N' %}
-                                    <div class="h-100">
-                                    <a href="{% url 'add_attendance' object.pk %}"><button class="btn btn-primary pull-right" type="submit">Add attendance</button></a>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        
+                                       <a href="{% url 'add_attendance' object.pk %}" class="btn btn-outline-primary btn-block pull-right">Add attendance</a>
+               
+                                     {% endif %}
+
+                              {% endfor %}
+                          
                         </div>
                     </div>
-            </div>
-
-</body>
-   
-                
+                </div>
 
 
 {% endblock content %}

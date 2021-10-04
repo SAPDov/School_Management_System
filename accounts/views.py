@@ -100,7 +100,8 @@ class Dashboard(ListView):
 	def get_queryset(self):
 		if self.request.user.is_teacher:
 			courses_queryset = self.request.user.teacher.teacher_courses.all()
-			q = Student.objects.filter(student_courses__in=courses_queryset)
+# filter the students in the specifix course- and remove duplicates
+			q = Student.objects.filter(student_courses__in=courses_queryset).distinct()
 			return q
 		elif self.request.user.is_student:
 			courses = self.request.user.student.student_courses.all() 
